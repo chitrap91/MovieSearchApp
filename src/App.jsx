@@ -12,18 +12,6 @@ function App() {
 
   const [cards, setCards] = useState([])
 
-  // async function fetchCards() {
-  //   try {
-  //     console.log("fetching cards")
-  //     const cardsData = await fetch("https://www.omdbapi.com/?s=english&apikey=7d697241")
-  //     const cardsResponse = await cardsData.json()
-  //     console.log(cardsResponse)
-  //     setCards(cardsResponse.Search || [])
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   useEffect(() => {
     handleMovieSearch("avengers")
   }, [])
@@ -73,13 +61,6 @@ function App() {
 
         <Search handleMovieSearch={handleMovieSearch} />
 
-
-
-        {/* <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {cards.map((card, key) => (
-            <MovieCard card={card} key={key} />
-          ))}
-        </div> */}
         <Routes>
           <Route path="/" element={renderMovieCards(cards)} />
           <Route path="/card-details/:imdbID" element={<CardDetails />} />
