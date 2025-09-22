@@ -26,7 +26,7 @@ const Search = ({ handleMovieSearch }) => {
                     className="flex-grow w-full p-2 text-gray-900 outline-none"
                 />
 
-                {/* submit as input (not button) */}
+               
                 <input
                     type="submit"
                     value="Search"

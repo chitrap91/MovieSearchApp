@@ -1,7 +1,7 @@
-import { Link, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import favIcon from './assets/favourite.png'
 
-function MovieCard({ card }) {
+function MovieCard({ card, handleFavouriteMovie }) {
 
     return (
 
@@ -33,7 +33,7 @@ function MovieCard({ card }) {
                     </Link>
 
                     {/* Favourite Button */}
-                    <button className="w-8 h-8 rounded-full flex items-center justify-center bg-white hover:bg-red-500 transition-colors">
+                    <button onClick={() => handleFavouriteMovie(card)} className="w-8 h-8 rounded-full flex items-center justify-center bg-white hover:bg-red-500 transition-colors">
                         <img src={favIcon} alt="favourite" className="w-4 h-4" />
                     </button>
                 </div>
