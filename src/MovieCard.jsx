@@ -19,12 +19,7 @@ function MovieCard({ card, handleFavouriteMovie }) {
                 <p className="text-gray-400">Year: {card.Year}</p>
                 <p className="text-gray-400 capitalize">Type: {card.Type}</p>
                 <div className="flex items-center justify-between mt-3">
-                    {/* View on IMDB */}
-                    {/* <BrowserRouter>
-                        <Routes>
-                            <Route path="/" element={<MovieCard />} />
-                        </Routes>
-                    </BrowserRouter> */}
+                    
                     <Link
                         to={`/card-details/${card.imdbID}`}
                         className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 transition-colors"
@@ -32,7 +27,7 @@ function MovieCard({ card, handleFavouriteMovie }) {
                         View on IMDB
                     </Link>
 
-                    {/* Favourite Button */}
+                
                     <button onClick={() => handleFavouriteMovie(card)} className="w-8 h-8 rounded-full flex items-center justify-center bg-white hover:bg-red-500 transition-colors">
                         <img src={favIcon} alt="favourite" className="w-4 h-4" />
                     </button>

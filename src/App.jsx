@@ -17,7 +17,7 @@ function App() {
   const [favorites, setFavorites] = useState([])
   const [searchText, setSearchText] = useState("batman")
 
-  let fetchData = async (searchText, currentPage = 1, type = "") => {
+  let handleMovieSearch = async (searchText, currentPage = 1, type = "") => {
     try {
       const resp = await axios.get(
         `https://www.omdbapi.com/`,
@@ -48,7 +48,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData(searchText, currentPage);
+    // fetchData(searchText, currentPage);
   }, [])
 
   let handleFavouriteMovie = (movie) => {
@@ -67,7 +67,7 @@ function App() {
 
 
   function handlePageClick(page) {
-    fetchData(searchText, page);
+    handleMovieSearch(searchText, page);
 
     // if user clicks on last page in visible set
     if (page === visiblePages[visiblePages.length - 1]) {
@@ -85,9 +85,9 @@ function App() {
   let renderSearchPage = (movieCards) => {
     return (
       <div>
-        <Header />
 
-        <Search handleMovieSearch={fetchData} />
+
+        <Search handleMovieSearch={handleMovieSearch} />
         {renderMovieCards(movieCards)}
       </div>
     );
@@ -96,7 +96,7 @@ function App() {
   let renderFovouritePage = (movieCards) => {
     return (
       <div>
-        <Header />
+
         <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
           {movieCards.map((card, key) => (
             <MovieCard card={card} key={key} handleFavouriteMovie={handleFavouriteMovie} />
@@ -132,16 +132,41 @@ function App() {
   return (
     <>
       <div className="bg-[#121212] min-h-screen w-full">
+
+        <Header />
         <Routes>
+
           <Route path="/" element={
             <>
-              {renderSearchPage(cards)}
+              <div>
+                <Search handleMovieSearch={handleMovieSearch} />
+                <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+                  {cards.map((card, key) => (
+                    <MovieCard card={card} key={key} handleFavouriteMovie={handleFavouriteMovie} />
+                  ))}
+                </div>
+                <Pagination
+                  totalResults={totalResults}
+                  currentPage={currentPage}
+                  visiblePages={visiblePages}
+                  handlePageClick={handlePageClick}
+                />
+                {/* {renderMovieCards(movieCards)} */}
+              </div>
             </>
           } />
           <Route path="/card-details/:imdbID" element={<CardDetails />} />
           <Route path="/favorites" element={
             <>
-              {renderFovouritePage(favorites)}
+              {/* {renderFovouritePage(favorites)} */}
+              <div>
+
+                <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+                  {favorites.map((card, key) => (
+                    <MovieCard card={card} key={key} handleFavouriteMovie={handleFavouriteMovie} />
+                  ))}
+                </div>
+              </div>
             </>
           } />
         </Routes>

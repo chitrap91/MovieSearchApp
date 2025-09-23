@@ -1,4 +1,4 @@
-function Pagination({ totalResults, currentPage, visiblePages = [], handlePageClick }) {
+function Pagination({ totalResults, currentPage, visiblePages , handlePageClick }) {
     const totalPages = Math.ceil(totalResults / 10);
 
     if (totalPages <= 1) return null;

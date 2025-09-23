@@ -54,7 +54,7 @@ function CardDetails() {
 
                     <div className="mt-6 flex gap-4">
                         <a
-                            href={`https://www.imdb.com/title/${imdbID}`}
+                           
                             target="_blank"
                             rel="noreferrer"
                             className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition"
