@@ -17,6 +17,20 @@ function App() {
   const [favorites, setFavorites] = useState([])
   const [searchText, setSearchText] = useState("batman")
 
+
+  useEffect(() => {
+    handleMovieSearch(searchText, currentPage);
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+  // Save favorites to localStorage whenever it changes
+  // useEffect(() => {
+  //   localStorage.setItem("favorites", JSON.stringify(favorites));
+  // }, [favorites]);
+
   async function handleMovieSearch(searchText, currentPage = 1, type = "") {
     try {
       const resp = await axios.get(
@@ -47,25 +61,24 @@ function App() {
     }
   };
 
-
-  useEffect(() => {
-    handleMovieSearch(searchText, currentPage);
-  }, [])
-
-  
   function handleFavouriteMovie(movie) {
-    let newFavourites = [...favorites];
+    // return () => {
+    let newFavorites = [...favorites];
 
-    if (newFavourites.includes(movie)) {
-      newFavourites.splice(newFavourites.indexOf(movie), 1);
+    const isAlreadyFav = newFavorites.find((fav) => fav.imdbID === movie.imdbID);
+
+    if (isAlreadyFav) {
+      // Remove from favorites
+      newFavorites = newFavorites.filter((fav) => fav.imdbID !== movie.imdbID);
     } else {
-      newFavourites.push(movie);
+      // Add to favorites
+      newFavorites.push(movie);
     }
 
-    setFavorites(newFavourites);
-    console.log(newFavourites);
-  };
-
+    setFavorites(newFavorites); // localStorage updated automatically by useEffect
+    localStorage.setItem("favorites", JSON.stringify(newFavorites));
+    // };
+  }
 
 
   function handlePageClick(page) {

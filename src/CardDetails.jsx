@@ -63,7 +63,7 @@ function CardDetails() {
                             ▶ Play
                         </a>
                         <Link to={"/favorites"} className="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition">
-                            + Add to Favourites
+                            + Add to Favorites
                         </Link>
                     </div>
                 </div>
