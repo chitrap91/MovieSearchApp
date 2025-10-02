@@ -12,12 +12,12 @@ function App() {
 
   const [cards, setCards] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(0); // API totalResults value
+  const [totalResults, setTotalResults] = useState(0);
   const [visiblePages, setVisiblePages] = useState([1, 2, 3, 4, 5]);
   const [favorites, setFavorites] = useState([])
   const [searchText, setSearchText] = useState("batman")
 
-  let handleMovieSearch = async (searchText, currentPage = 1, type = "") => {
+  async function handleMovieSearch(searchText, currentPage = 1, type = "") {
     try {
       const resp = await axios.get(
         `https://www.omdbapi.com/`,
@@ -47,11 +47,13 @@ function App() {
     }
   };
 
+
   useEffect(() => {
-    // fetchData(searchText, currentPage);
+    handleMovieSearch(searchText, currentPage);
   }, [])
 
-  let handleFavouriteMovie = (movie) => {
+  
+  function handleFavouriteMovie(movie) {
     let newFavourites = [...favorites];
 
     if (newFavourites.includes(movie)) {
@@ -81,54 +83,6 @@ function App() {
       setVisiblePages(newPages);
     }
   }
-
-  let renderSearchPage = (movieCards) => {
-    return (
-      <div>
-
-
-        <Search handleMovieSearch={handleMovieSearch} />
-        {renderMovieCards(movieCards)}
-      </div>
-    );
-  }
-
-  let renderFovouritePage = (movieCards) => {
-    return (
-      <div>
-
-        <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-          {movieCards.map((card, key) => (
-            <MovieCard card={card} key={key} handleFavouriteMovie={handleFavouriteMovie} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-
-
-  let renderMovieCards = (movieCards) => {
-    return (
-      <div>
-        <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-          {movieCards.map((card, key) => (
-            <MovieCard card={card} key={key} handleFavouriteMovie={handleFavouriteMovie} />
-          ))}
-        </div>
-        <div>
-          <Pagination
-            totalResults={totalResults}
-            currentPage={currentPage}
-            visiblePages={visiblePages}
-            handlePageClick={handlePageClick}
-          />
-        </div>
-      </div>
-    );
-  }
-
-
   return (
     <>
       <div className="bg-[#121212] min-h-screen w-full">

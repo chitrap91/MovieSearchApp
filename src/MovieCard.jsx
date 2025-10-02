@@ -5,15 +5,15 @@ function MovieCard({ card, handleFavouriteMovie }) {
 
     return (
 
-        <div className="mt-10 relative bg-[#1f2937] rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform">
-            {/* Poster */}
+        <div className="mt-5 relative bg-[#1f2937] rounded-xl shadow-lg  hover:scale-105 transition-transform">
+         
             <img
                 src={card.Poster}
                 alt={card.Title}
                 className="w-full h-72 object-cover"
             />
 
-            {/* Info */}
+          
             <div className="p-4">
                 <h2 className="text-lg font-bold text-white mb-2">{card.Title}</h2>
                 <p className="text-gray-400">Year: {card.Year}</p>
@@ -22,7 +22,7 @@ function MovieCard({ card, handleFavouriteMovie }) {
                     
                     <Link
                         to={`/card-details/${card.imdbID}`}
-                        className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 transition-colors"
+                        className="bg-red-600 text-white px-1 py-1 rounded-lg hover:bg-red-700 transition-colors"
                     >
                         View on IMDB
                     </Link>

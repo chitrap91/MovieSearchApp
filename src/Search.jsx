@@ -3,19 +3,19 @@
 
 import { useFormik } from "formik";
 
-const Search = ({ handleMovieSearch }) => {
+function Search({ handleMovieSearch }) {
     const formik = useFormik({
         initialValues: {
             search: "",
         },
         onSubmit: (values) => {
-            handleMovieSearch(values.search); // ✅ correct function call
+            handleMovieSearch(values.search);
             console.log(values);
         },
     });
 
     return (
-        <div className="mt-5 mx-auto flex items-center max-w-5xl md:w-1/3 bg-white rounded-lg overflow-hidden shadow">
+        <div className="mt-5 mx-auto flex  justify-center  items-center max-w-5xl md:w-1/3 bg-white rounded-lg overflow-hidden shadow">
             <form onSubmit={formik.handleSubmit} className="flex w-full">
                 <input
                     type="text"
@@ -26,7 +26,7 @@ const Search = ({ handleMovieSearch }) => {
                     className="flex-grow w-full p-2 text-gray-900 outline-none"
                 />
 
-               
+
                 <input
                     type="submit"
                     value="Search"

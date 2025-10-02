@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function CardDetails() {
     const { imdbID } = useParams();
@@ -25,7 +26,7 @@ function CardDetails() {
     if (!movie) return <div className="p-4">Loading...</div>;
 
     return (
-        <div className="bg-black w-5xl mx-auto text-white min-h-screen p-6">
+        <div className="bg-black w-5xl flex justify-center flex-col mx-auto text-white min-h-screen p-6">
 
             <div className="flex flex-col md:flex-row gap-8">
 
@@ -54,16 +55,16 @@ function CardDetails() {
 
                     <div className="mt-6 flex gap-4">
                         <a
-                           
+
                             target="_blank"
                             rel="noreferrer"
                             className="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition"
                         >
                             ▶ Play
                         </a>
-                        <button className="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition">
+                        <Link to={"/favorites"} className="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition">
                             + Add to Favourites
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
